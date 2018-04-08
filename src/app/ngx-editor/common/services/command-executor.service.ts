@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpRequest } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpRequest} from '@angular/common/http';
 import * as Utils from '../utils/ngx-editor.utils';
 
 @Injectable()
@@ -12,7 +12,8 @@ export class CommandExecutorService {
    *
    * @param _http HTTP Client for making http requests
    */
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient) {
+  }
 
   /**
    * executes command from the toolbar
@@ -67,10 +68,10 @@ export class CommandExecutorService {
   }
 
   /**
- * inserts image in the editor
- *
- * @param videParams url of the image to be inserted
- */
+   * inserts image in the editor
+   *
+   * @param videParams url of the image to be inserted
+   */
   insertVideo(videParams: any): void {
     if (this.savedSelection) {
       if (videParams) {
@@ -126,7 +127,7 @@ export class CommandExecutorService {
    * @param file file that has to be uploaded
    * @param endPoint enpoint to which the image has to be uploaded
    */
-  uploadImage(file: File, endPoint: string): any {
+  uploadImage(file: File, endPoint: string, headers?: any): any {
 
     if (!endPoint) {
       throw new Error('Image Endpoint isn`t provided or invalid');
@@ -139,7 +140,8 @@ export class CommandExecutorService {
       formData.append('file', file);
 
       const req = new HttpRequest('POST', endPoint, formData, {
-        reportProgress: true
+        reportProgress: true,
+        headers: headers ? headers : ''
       });
 
       return this._http.request(req);
