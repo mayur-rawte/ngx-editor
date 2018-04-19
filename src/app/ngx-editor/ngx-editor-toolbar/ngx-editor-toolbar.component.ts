@@ -1,9 +1,9 @@
-import { Component, Input, Output, EventEmitter, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpResponse } from '@angular/common/http';
-import { PopoverConfig } from 'ngx-bootstrap';
-import { CommandExecutorService } from '../common/services/command-executor.service';
-import { MessageService } from '../common/services/message.service';
+import {Component, Input, Output, EventEmitter, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {HttpResponse} from '@angular/common/http';
+import {PopoverConfig} from 'ngx-bootstrap';
+import {CommandExecutorService} from '../common/services/command-executor.service';
+import {MessageService} from '../common/services/message.service';
 import * as Utils from '../common/utils/ngx-editor.utils';
 
 @Component({
@@ -53,9 +53,9 @@ export class NgxEditorToolbarComponent implements OnInit {
   @Output() execute: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private _popOverConfig: PopoverConfig,
-    private _formBuilder: FormBuilder,
-    private _messageService: MessageService,
-    private _commandExecutorService: CommandExecutorService) {
+              private _formBuilder: FormBuilder,
+              private _messageService: MessageService,
+              private _commandExecutorService: CommandExecutorService) {
     this._popOverConfig.outsideClick = true;
     this._popOverConfig.placement = 'bottom';
     this._popOverConfig.container = 'body';
@@ -160,7 +160,11 @@ export class NgxEditorToolbarComponent implements OnInit {
 
           if (event instanceof HttpResponse) {
             try {
-              this._commandExecutorService.insertImage(event.body.url);
+              if (this.config.responseEndPoint) {
+                this._commandExecutorService.insertImage(this.config.responseEndPoint + event.body.url);
+              } else {
+                this._commandExecutorService.insertImage(event.body.url);
+              }
             } catch (error) {
               this._messageService.sendMessage(error.message);
             }

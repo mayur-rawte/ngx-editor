@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpRequest} from '@angular/common/http';
+import {HttpClient, HttpRequest, HttpHeaders} from '@angular/common/http';
 import * as Utils from '../utils/ngx-editor.utils';
 
 @Injectable()
@@ -139,9 +139,14 @@ export class CommandExecutorService {
 
       formData.append('file', file);
 
+      let requestHeader = new HttpHeaders();
+      const headerKeys = Object.keys(headers);
+      for (const headerKey of headerKeys) {
+        requestHeader = requestHeader.set(headerKey, headers[headerKey]);
+      }
       const req = new HttpRequest('POST', endPoint, formData, {
         reportProgress: true,
-        headers: headers ? headers : ''
+        headers: requestHeader
       });
 
       return this._http.request(req);

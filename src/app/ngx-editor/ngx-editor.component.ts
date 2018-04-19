@@ -2,15 +2,15 @@ import {
   Component, OnInit, Input, Output, ViewChild,
   EventEmitter, Renderer2, forwardRef
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import {NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/forms';
 import * as CodeMirror from 'codemirror';
 import 'codemirror/addon/display/placeholder.js';
 import 'codemirror/mode/htmlmixed/htmlmixed.js';
 
-import { CommandExecutorService } from './common/services/command-executor.service';
-import { MessageService } from './common/services/message.service';
+import {CommandExecutorService} from './common/services/command-executor.service';
+import {MessageService} from './common/services/message.service';
 
-import { ngxEditorConfig, codeMirrorConfig } from './common/ngx-editor.defaults';
+import {ngxEditorConfig, codeMirrorConfig} from './common/ngx-editor.defaults';
 import * as Utils from './common/utils/ngx-editor.utils';
 
 @Component({
@@ -102,7 +102,8 @@ export class NgxEditorComponent implements OnInit, ControlValueAccessor {
   constructor(
     private _messageService: MessageService,
     private _commandExecutor: CommandExecutorService,
-    private _renderer: Renderer2) { }
+    private _renderer: Renderer2) {
+  }
 
   /**
    * events

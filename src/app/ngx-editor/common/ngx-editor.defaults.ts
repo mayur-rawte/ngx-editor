@@ -22,7 +22,9 @@ export const ngxEditorConfig = {
     ['link', 'unlink', 'image', 'video'],
     ['code']
   ],
-  headers: {}
+  headers: {},
+  responseEndPoint: null,
+  appendImageEndPointToResponse: true
 };
 
 /**
