@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
+import {Injectable} from '@angular/core';
+
+import {Observable} from 'rxjs';
+import {Subject} from 'rxjs';
 
 /** time in which the message has to be cleared */
 const DURATION = 7000;
@@ -12,7 +12,8 @@ export class MessageService {
   /** variable to hold the user message */
   private message: Subject<string> = new Subject();
 
-  constructor() { }
+  constructor() {
+  }
 
   /** returns the message sent by the editor */
   getMessage(): Observable<string> {

@@ -27,7 +27,7 @@ export class CommandExecutorService {
     }
 
     if (command === 'enableObjectResizing') {
-      document.execCommand('enableObjectResizing', true, true);
+      document.execCommand('enableObjectResizing', true, 'true');
       return;
     }
 

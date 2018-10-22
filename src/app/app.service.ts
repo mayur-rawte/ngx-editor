@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import 'rxjs/add/operator/map';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {map} from 'rxjs/operators';
+
 
 @Injectable()
 export class AppService {
@@ -11,18 +12,19 @@ export class AppService {
    *
    * @param _http Performs HTTP requests
    */
-  constructor(private _http: HttpClient) { }
-
-  getLatestRelease(): any {
-
-    return this._http.get(this.releaseURL)
-      .map((response: any) => {
-        if (response && response['length'] !== 0) {
-          return response;
-        } else {
-          return [];
-        }
-      });
+  constructor(private _http: HttpClient) {
   }
 
+  getLatestRelease(): any {
+    return this._http.get(this.releaseURL)
+      .pipe(
+        map((response: any) => {
+          if (response && response['length'] !== 0) {
+            return response;
+          } else {
+            return [];
+          }
+        })
+      );
+  }
 }
